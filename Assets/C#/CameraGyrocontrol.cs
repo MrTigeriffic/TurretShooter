@@ -9,6 +9,7 @@ public class CameraGyrocontrol : MonoBehaviour
     private GameObject cameraContainer;
     private Quaternion rot;
 
+    public float cameraSpeed;
     void Start()
     {
         Screen.orientation = ScreenOrientation.LandscapeLeft;
@@ -17,6 +18,8 @@ public class CameraGyrocontrol : MonoBehaviour
         transform.SetParent(cameraContainer.transform);
         //gyro = Input.gyro;
         gyroEnabled = EnableGyro();
+
+        GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, -cameraSpeed);
     }
 
     private bool EnableGyro()
@@ -39,6 +42,7 @@ public class CameraGyrocontrol : MonoBehaviour
         {
             transform.localRotation = gyro.attitude * rot; //update local position of camera 
         }
+
     }
 
     // Update is called once per frame
