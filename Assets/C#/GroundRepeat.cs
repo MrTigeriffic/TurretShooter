@@ -19,7 +19,7 @@ public class GroundRepeat : MonoBehaviour
         GameObject obj = ObjectPooler.current.GetPooledObject();
         if (obj == null) return;
 
-        obj.transform.position = transform.position;
+        obj.transform.position = transform.position * 2;
         obj.transform.rotation = transform.rotation;
         obj.SetActive(true);
     }
