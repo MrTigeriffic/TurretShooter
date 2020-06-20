@@ -6,6 +6,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class InfiniteGround : MonoBehaviour
@@ -23,7 +24,12 @@ public class InfiniteGround : MonoBehaviour
     //private BoxCollider2D groundCollider;
     //private float groundHorizontalLength;
 
+    public GameObject[] ground;
     public float groundSpeed = 100f;
+
+    private Transform startPos;
+    private Vector3 endPos;
+    private Vector2 screenBounds;
     //public Rigidbody rb;
 
     //private bool isMoving = false;
@@ -36,7 +42,14 @@ public class InfiniteGround : MonoBehaviour
         //groundHorizontalLength = groundCollider.size.x;
 
         //rb = GetComponent<Rigidbody>();
-        transform.position = new Vector3(0, 0, groundSpeed * Time.deltaTime);
+
+
+        foreach (GameObject obj in ground)
+        {
+            loadChildObjects(obj);
+        }
+        //startPos = GetComponent<Transform>();
+        //transform.position = new Vector3(0, 0, groundSpeed * Time.deltaTime);
     }
 
     void Update()
@@ -62,8 +75,13 @@ public class InfiniteGround : MonoBehaviour
         //}
 
         //Code to Stop ground when game over
-        //transform.Translate(Vector3.forward * Time.deltaTime);
-        transform.position += new Vector3(0, 0, groundSpeed * Time.deltaTime);
+        
+        //transform.position += new Vector3(0, 0, groundSpeed * Time.deltaTime);
+        //Debug.Log(startPos.position.z);
+        //if (startPos.position.z > 1000)
+        //{
+        //    transform.position = transform.position + new Vector3(0, 0, 0);
+        //}
     }
 
     //private void RepositionBG()
@@ -91,4 +109,21 @@ public class InfiniteGround : MonoBehaviour
     //    nextGroundSpawn.z -= 1000;
     //    StartCoroutine(spawnTile());
     //}
+
+    void loadChildObjects(GameObject obj)
+    {
+        float groundLength = obj.GetComponent<Renderer>().bounds.size.z /2;
+        Debug.Log(groundLength);
+        //int childsNeeded = (int)Mathf.Ceil();
+        GameObject clone = Instantiate(obj) as GameObject;
+        for(int i =0; i<= 7; i++)
+        {
+            Debug.Log(clone + " " + i);
+            //GameObject c = Instantiate(clone) as GameObject;
+            //c.transform.SetParent(obj.transform);
+            //c.transform.position = new Vector3(groundLength * i, obj.transform.position.y, obj.transform.position.z);
+            //c.name = obj.name + i;
+        }
+        //Destroy(clone);
+    }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class GroundRepeat : MonoBehaviour
 {
     public float grndRepeat = 1f;
-
+    public float groundSpeed = 100f;
     void Start()
     {
 
@@ -21,6 +21,7 @@ public class GroundRepeat : MonoBehaviour
 
         obj.transform.position = transform.position * 2;
         obj.transform.rotation = transform.rotation;
+        transform.position = new Vector3(0, 0, groundSpeed * Time.deltaTime);
         obj.SetActive(true);
     }
 }
