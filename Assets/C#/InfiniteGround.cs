@@ -11,12 +11,13 @@ using UnityEngine;
 
 public class InfiniteGround : MonoBehaviour
 {
-    //public Transform ground1Obj;
-    //public Transform cubeSpawn;
-    //private Vector3 nextGroundSpawn;
-    //private Vector3 nextCubeSpawn;
+    public Transform ground1Obj;
+    public Transform cubeSpawn;
+    private int count;
+    private Vector3 lastPosition;
 
-    //private int randX;
+    private int randX;
+    //private GameObject obj;
     //private float timer = 10f;
     //private GameObject newInstance;
     // First attempt of repeating bg worked but the destroy was not working as desired.
@@ -24,12 +25,12 @@ public class InfiniteGround : MonoBehaviour
     //private BoxCollider2D groundCollider;
     //private float groundHorizontalLength;
 
-    public GameObject[] ground;
-    public float groundSpeed = 100f;
+    //public GameObject[] ground;
+    //public float groundSpeed = 100f;
 
-    private Transform startPos;
-    private Vector3 endPos;
-    private Vector2 screenBounds;
+    //private Transform startPos;
+    //private Vector3 endPos;
+    //private Vector2 screenBounds;
     //public Rigidbody rb;
 
     //private bool isMoving = false;
@@ -37,19 +38,36 @@ public class InfiniteGround : MonoBehaviour
 
     void Start()
     {
+        count = 0;
+        for (int i = 0; i < 10; i++)
+        {
+            Instantiate(ground1Obj, new Vector3(i * 100f, 0, 0), Quaternion.identity,transform.parent);
+            //ground1Obj.SetParent(ground1Obj.transform);
+            count++;
+            //Debug.Log(count);
+            if (count == 10)
+            {
+                lastPosition = ground1Obj.position;
+                Debug.Log("Last Position: " + lastPosition);
+            }
+                
+        }
+
         //StartCoroutine(spawnTile());
+
         //groundCollider = GetComponent<BoxCollider2D>();
         //groundHorizontalLength = groundCollider.size.x;
 
         //rb = GetComponent<Rigidbody>();
 
 
-        foreach (GameObject obj in ground)
-        {
-            loadChildObjects(obj);
-        }
+        //foreach (GameObject obj in ground)
+        //{
+        //    loadChildObjects(obj);
+        //}
         //startPos = GetComponent<Transform>();
         //transform.position = new Vector3(0, 0, groundSpeed * Time.deltaTime);
+
     }
 
     void Update()
@@ -82,6 +100,7 @@ public class InfiniteGround : MonoBehaviour
         //{
         //    transform.position = transform.position + new Vector3(0, 0, 0);
         //}
+
     }
 
     //private void RepositionBG()
@@ -107,23 +126,38 @@ public class InfiniteGround : MonoBehaviour
     //    Instantiate(ground1Obj, nextGroundSpawn, ground1Obj.rotation);
     //    Instantiate(cubeSpawn, nextCubeSpawn, cubeSpawn.rotation); //cube to randomly spawn on the x of the ground tile
     //    nextGroundSpawn.z -= 1000;
-    //    StartCoroutine(spawnTile());
+    //    Coroutine b = StartCoroutine(destroyTile());
     //}
 
-    void loadChildObjects(GameObject obj)
-    {
-        float groundLength = obj.GetComponent<Renderer>().bounds.size.z /2;
-        Debug.Log(groundLength);
-        //int childsNeeded = (int)Mathf.Ceil();
-        GameObject clone = Instantiate(obj) as GameObject;
-        for(int i =0; i<= 7; i++)
-        {
-            Debug.Log(clone + " " + i);
-            //GameObject c = Instantiate(clone) as GameObject;
-            //c.transform.SetParent(obj.transform);
-            //c.transform.position = new Vector3(groundLength * i, obj.transform.position.y, obj.transform.position.z);
-            //c.name = obj.name + i;
-        }
-        //Destroy(clone);
-    }
+    //IEnumerator destroyTile()
+    //{
+    //    float f = 0.0f;
+    //    float start = Time.time;
+
+    //    while (f < 5.0f)
+    //    {
+            
+    //        yield return new WaitForSeconds(1.0f);
+    //        f = f + 1.0f;
+    //        Destroy(ground1Obj);
+    //    }
+    //    float t = Time.time - start;
+    //    yield return null;
+    //}
+    //void loadChildObjects(GameObject obj)
+    //{
+    //    float groundLength = obj.GetComponent<Renderer>().bounds.size.z /2;
+    //    Debug.Log(groundLength);
+    //    //int childsNeeded = (int)Mathf.Ceil();
+    //    GameObject clone = Instantiate(obj) as GameObject;
+    //    for(int i =0; i<= 7; i++)
+    //    {
+    //        Debug.Log(clone + " " + i);
+    //        //GameObject c = Instantiate(clone) as GameObject;
+    //        //c.transform.SetParent(obj.transform);
+    //        //c.transform.position = new Vector3(groundLength * i, obj.transform.position.y, obj.transform.position.z);
+    //        //c.name = obj.name + i;
+    //    }
+    //    //Destroy(clone);
+    //}
 }
