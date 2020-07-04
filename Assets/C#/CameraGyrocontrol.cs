@@ -20,6 +20,7 @@ public class CameraGyrocontrol : MonoBehaviour
         gyroEnabled = EnableGyro();
 
         GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, -cameraSpeed);
+        
     }
 
     private bool EnableGyro()

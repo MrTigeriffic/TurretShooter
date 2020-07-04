@@ -4,52 +4,33 @@ using UnityEngine;
 
 public class InfiniteGround_2_0 : MonoBehaviour
 {
-    public GameObject[] ground;
-    public float groundSpeed = 100f;
+    public GameObject groundObj;
+    public Transform groundSpawnPoint;
+    public float groundDistance; 
 
-    private Transform startPos;
-    private Vector3 endPos;
-    private int cloneCount = 0;
+    private float groundLength;
 
-    void Start()
+    public float groundDistMin;
+    public float groundDistMax;
+
+    public ObjPler theObjPool;
+
+    private void Start()
     {
-
-        foreach (GameObject obj in ground)
-        {
-            loadChildObjects(obj);
-        }
+        groundLength = groundObj.transform.localScale.z;
     }
 
-    void Update()
+    private void Update()
     {
-        //transform.position += new Vector3(0, 0, groundSpeed * Time.deltaTime);
-
-    }
-
-    void loadChildObjects(GameObject obj)
-    {
-        
-        
-         //cloning the child object 
-        for (int i = 0; i <= ground.Length; i ++)
+        if (transform.position.z > groundSpawnPoint.position.z)
         {
-            GameObject clone = Instantiate(obj);
-            cloneCount++;
-            //c.transform.SetParent(obj.transform);
-            //c.transform.position = new Vector3(obj.transform.position.x, obj.transform.position.y, obj.transform.position.z * 100);
-            //c.name = obj.name + i;
-            Debug.Log(obj.name + " " + i);
-            if(cloneCount > 10)
-            {
-                Destroy(clone);
-            }
-            break;
+            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - groundLength - groundDistance);
+            //Instantiate(groundObj,transform.position,transform.rotation);
+            GameObject newGround = theObjPool.GetPooledObject();
+
+            newGround.transform.position = transform.position;
+            newGround.transform.rotation = transform.rotation;
+            newGround.SetActive(true);
         }
-        //if (cloneCount > 10)
-        //{
-            //Destroy(c);
-        //}
-        //Destroy(clone);
-        //Destroy(obj.GetComponent<Renderer>());
     }
 }
