@@ -11,14 +11,14 @@ using UnityEngine;
 
 public class InfiniteGround : MonoBehaviour
 {
-    public Transform ground1Obj;
-    public Transform cubeSpawn;
-    private int count;
-    private int currentCount;
-    private Vector3 nextCubeSpawn;
-    private Vector3 lastPosition;
+    //public Transform ground1Obj;
+    //public Transform cubeSpawn;
+    //private int count;
+    ////private int currentCount;
+    //private Vector3 nextCubeSpawn;
+    //private Vector3 lastPosition;
 
-    private int randX;
+    //private int randX;
     //private GameObject obj;
     //private float timer = 10f;
     //private GameObject newInstance;
@@ -40,8 +40,8 @@ public class InfiniteGround : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(InstantiatefloorObj());
-        StartCoroutine(InstantiateEnemyObj());
+        //StartCoroutine(InstantiatefloorObj());
+        //StartCoroutine(InstantiateEnemyObj());
         //StartCoroutine(spawnTile());
 
         //groundCollider = GetComponent<BoxCollider2D>();
@@ -92,38 +92,38 @@ public class InfiniteGround : MonoBehaviour
         //StartCoroutine(InstantiateEnemyObj());
     }
 
-    IEnumerator InstantiatefloorObj()
-    {
-        count++;
-        for (int i = 0; i < 10; i++)
-        {
-            Instantiate(ground1Obj, new Vector3(0, 0, i * 10000f), Quaternion.identity);
-            //ground1Obj.SetParent(ground1Obj.transform);
+    //IEnumerator InstantiatefloorObj()
+    //{
+    //    count++;
+    //    for (int i = 0; i < 10; i++)
+    //    {
+    //        Instantiate(ground1Obj, new Vector3(0, 0, i * 10000f), Quaternion.identity);
+    //        //ground1Obj.SetParent(ground1Obj.transform);
             
-            //Debug.Log(count);
-            if (i == 10)
-            {
-                count = currentCount;
-                Debug.Log("Current Count: " + currentCount);
-            }
-        }
-        if (count > currentCount)
-        {
-            yield return new WaitForSeconds(5.0f);
-            //Destroy(ground1Obj);
-            Debug.Log("5 seconds");
-        }
-        yield return null;
-    }
-    IEnumerator InstantiateEnemyObj()
-    {
-        randX = Random.Range(-500, 501);
-        nextCubeSpawn.z = Random.Range(-1000, 1000);
-        nextCubeSpawn.y = 55f;
-        nextCubeSpawn.x = randX;
-        yield return new WaitForSeconds(1);
-        Instantiate(cubeSpawn, nextCubeSpawn, cubeSpawn.rotation); //cube to randomly spawn on the x of the ground tile
-    }
+    //        //Debug.Log(count);
+    //        if (i == 10)
+    //        {
+    //            count = currentCount;
+    //            Debug.Log("Current Count: " + currentCount);
+    //        }
+    //    }
+    //    if (count > currentCount)
+    //    {
+    //        yield return new WaitForSeconds(5.0f);
+    //        //Destroy(ground1Obj);
+    //        Debug.Log("5 seconds");
+    //    }
+    //    yield return null;
+    //}
+    //IEnumerator InstantiateEnemyObj()
+    //{
+    //    randX = Random.Range(-500, 501);
+    //    nextCubeSpawn.z = Random.Range(-1000, 1000);
+    //    nextCubeSpawn.y = 55f;
+    //    nextCubeSpawn.x = randX;
+    //    yield return new WaitForSeconds(1);
+    //    Instantiate(cubeSpawn, nextCubeSpawn, cubeSpawn.rotation); //cube to randomly spawn on the x of the ground tile
+    //}
 
     //private void RepositionBG()
     //{
