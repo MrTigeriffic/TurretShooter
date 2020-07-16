@@ -10,20 +10,20 @@ public class MoveComponent : MonoBehaviour
     [SerializeField] private float despawnDistance = -110f;
 
     private bool canSpawnGround = true;
-    private Rigidbody rb;
+    //private Rigidbody rb;
 
-    private void Update()
+    void Update()
     {
         transform.position += -transform.forward * speed * Time.deltaTime;
 
-        //if the component the object is attached tto is "ground"
+        //if the component the object is attached to is "Ground" 
         if(transform.position.z <= objectDistance && transform.tag == "Ground" && canSpawnGround)
         {
             ObjectSpawner.instance.SpawnGround();
             canSpawnGround = false;
 
         }
-        if(transform.position.z <= despawnDistance)
+        if(transform.position.z <= despawnDistance)//make object invisible when off screen
         {
             canSpawnGround = true;
             gameObject.SetActive(false);

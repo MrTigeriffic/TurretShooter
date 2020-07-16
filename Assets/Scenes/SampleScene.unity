@@ -250,36 +250,6 @@ Transform:
   m_Father: {fileID: 534669905}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &343349761
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 343349762}
-  m_Layer: 0
-  m_Name: groundGeneration
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &343349762
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 343349761}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 500}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 534669905}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &369646108 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2892685691663903941, guid: 966a32e1ff6a7bb4088fb552c3c653cf,
@@ -398,7 +368,7 @@ Camera:
   m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
+  m_FocalLength: 16.1
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -407,7 +377,7 @@ Camera:
     height: 1
   near clip plane: 0.03
   far clip plane: 10000
-  field of view: 80
+  field of view: 73.39739
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -432,16 +402,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_LocalRotation: {x: 0.06975647, y: 0, z: 0, w: 0.9975641}
-  m_LocalPosition: {x: 0, y: 144, z: -500}
+  m_LocalRotation: {x: 0.11320323, y: 0, z: 0, w: 0.9935719}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 176744553}
   - {fileID: 1219521889}
-  - {fileID: 343349762}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 8, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 13, y: 0, z: 0}
 --- !u!114 &534669906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -550,7 +519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb259867ac436d74c8c589713e652b72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundSpawnDistance: 50
+  groundSpawnDistance: 90
 --- !u!4 &546128529
 Transform:
   m_ObjectHideFlags: 0
@@ -1397,7 +1366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundObj: {fileID: 369646108}
-  groundSpawnPoint: {fileID: 343349762}
+  groundSpawnPoint: {fileID: 0}
   groundDistance: 0.5
   groundDistMin: 0
   groundDistMax: 0
@@ -1423,11 +1392,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2892685691663903941, guid: 966a32e1ff6a7bb4088fb552c3c653cf,
-        type: 3}
-      propertyPath: m_TagString
-      value: Ground
-      objectReference: {fileID: 0}
     - target: {fileID: 4857477803433367761, guid: 966a32e1ff6a7bb4088fb552c3c653cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1441,7 +1405,7 @@ PrefabInstance:
     - target: {fileID: 4857477803433367761, guid: 966a32e1ff6a7bb4088fb552c3c653cf,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4857477803433367761, guid: 966a32e1ff6a7bb4088fb552c3c653cf,
         type: 3}
@@ -1487,6 +1451,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: OceanPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087550065954924222, guid: 966a32e1ff6a7bb4088fb552c3c653cf,
+        type: 3}
+      propertyPath: speed
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087550065954924222, guid: 966a32e1ff6a7bb4088fb552c3c653cf,
+        type: 3}
+      propertyPath: objectDistance
+      value: -40
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087550065954924222, guid: 966a32e1ff6a7bb4088fb552c3c653cf,
+        type: 3}
+      propertyPath: despawnDistance
+      value: -105
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 966a32e1ff6a7bb4088fb552c3c653cf, type: 3}
