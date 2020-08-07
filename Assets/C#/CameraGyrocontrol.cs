@@ -6,21 +6,33 @@ public class CameraGyrocontrol : MonoBehaviour
     
     private bool gyroEnabled;
     private Gyroscope gyro;
-    private GameObject cameraContainer;
-    private Quaternion rot;
+    //private GameObject cameraContainer;
+    //private Quaternion rot;
 
+    private float initOrientationX;
+    private float initOrientationY;
+    private float initOrientationZ;
+
+    //private Transform ThisTransform = null;// rotation speed delay setup
+    //public Transform Target = null;
+
+    public float cameraSensitivity = 2f;
+    public GameObject playerView;
+    public GameObject playerNode;
     public float cameraSpeed;
     void Start()
     {
         Screen.orientation = ScreenOrientation.LandscapeLeft;
-        cameraContainer = new GameObject("Camera Container");
-        cameraContainer.transform.position = transform.position;
-        transform.SetParent(cameraContainer.transform);
-        //gyro = Input.gyro;
+        //cameraContainer = new GameObject("Camera Container");
+        //cameraContainer.transform.position = transform.position;
+       //transform.SetParent(cameraContainer.transform);
+        gyro = Input.gyro;
         gyroEnabled = EnableGyro();
 
         GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, -cameraSpeed);
-        
+        initOrientationX = Input.gyro.rotationRateUnbiased.x;
+        initOrientationY = Input.gyro.rotationRateUnbiased.y;
+        initOrientationZ = -Input.gyro.rotationRateUnbiased.z;
     }
 
     private bool EnableGyro()
@@ -29,8 +41,8 @@ public class CameraGyrocontrol : MonoBehaviour
         {
             gyro = Input.gyro;
             gyro.enabled = true;
-            cameraContainer.transform.rotation = Quaternion.Euler(90f, 90f, 0f);
-            rot = new Quaternion(0, 0, 1, 0);
+           // cameraContainer.transform.rotation = Quaternion.Euler(90f, 90f, 0f);
+            //rot = new Quaternion(0, 0, 1, 0);
 
             return true;
         }
@@ -41,9 +53,13 @@ public class CameraGyrocontrol : MonoBehaviour
     {
         if (gyroEnabled)
         {
-            transform.localRotation = gyro.attitude * rot; //update local position of camera 
+            //transform.localRotation = gyro.attitude * rot; //update local position of camera 
+            playerNode.transform.Rotate(0, initOrientationY - Input.gyro.rotationRateUnbiased.y * cameraSensitivity, 0);
+            playerView.transform.Rotate(initOrientationX - Input.gyro.rotationRateUnbiased.x * cameraSensitivity, 0, initOrientationZ + Input.gyro.rotationRateUnbiased.z * cameraSensitivity);
         }
 
+        //Quaternion DestRot = Quaternion.LookRotation(Target.position - ThisTransform.position, Vector3.up);
+        //ThisTransform.rotation = Quaternion.RotateTowards(ThisTransform.rotation, DestRot, cameraSensitivity * Time.deltaTime);// look delay to be applied to gun when rotating. Needs tweaking
     }
 
     // Update is called once per frame
