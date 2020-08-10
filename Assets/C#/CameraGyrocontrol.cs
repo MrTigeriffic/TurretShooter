@@ -56,6 +56,7 @@ public class CameraGyrocontrol : MonoBehaviour
             //transform.localRotation = gyro.attitude * rot; //update local position of camera 
             playerNode.transform.Rotate(0, initOrientationY - Input.gyro.rotationRateUnbiased.y * cameraSensitivity, 0);
             playerView.transform.Rotate(initOrientationX - Input.gyro.rotationRateUnbiased.x * cameraSensitivity, 0, initOrientationZ + Input.gyro.rotationRateUnbiased.z * cameraSensitivity);
+            //rotation has undesired effects but starting position from where player hold their phone works
         }
 
         //Quaternion DestRot = Quaternion.LookRotation(Target.position - ThisTransform.position, Vector3.up);
