@@ -7,7 +7,7 @@ public class MoveComponent : MonoBehaviour
 
     [SerializeField] private float speed = 5f;
     [SerializeField] private float objectDistance = -40f;
-    [SerializeField] private float despawnDistance = -110f;
+    [SerializeField] private float despawnDistance = -1000f;
 
     private bool canSpawnGround = true;
     //private Rigidbody rb;
