@@ -7,7 +7,7 @@ public class CameraGyrocontrol : MonoBehaviour
     private bool gyroEnabled;
     private Gyroscope gyro;
     //private GameObject cameraContainer;
-    //private Quaternion rot;
+    private Quaternion rot;
 
     private float initOrientationX;
     private float initOrientationY;
@@ -54,9 +54,17 @@ public class CameraGyrocontrol : MonoBehaviour
         if (gyroEnabled)
         {
             //transform.localRotation = gyro.attitude * rot; //update local position of camera 
-            playerNode.transform.Rotate(0, initOrientationY - Input.gyro.rotationRateUnbiased.y * cameraSensitivity, 0);
-            playerView.transform.Rotate(initOrientationX - Input.gyro.rotationRateUnbiased.x * cameraSensitivity, 0, initOrientationZ + Input.gyro.rotationRateUnbiased.z * cameraSensitivity);
+            //playerNode.transform.Rotate(0, initOrientationY - Input.gyro.rotationRateUnbiased.y * cameraSensitivity, 0);
+            //playerView.transform.Rotate(initOrientationX - Input.gyro.rotationRateUnbiased.x * cameraSensitivity, 0, initOrientationZ + Input.gyro.rotationRateUnbiased.z * cameraSensitivity);
             //rotation has undesired effects but starting position from where player hold their phone works
+
+            //11/08/2020 Code below has desired effects with gyroscope and z axis locked
+            Vector3 previousEulerAngle = transform.eulerAngles;
+            Vector3 gyroInput = -Input.gyro.rotationRateUnbiased;
+
+            Vector3 targetEulerAngles = previousEulerAngle + gyroInput * Time.deltaTime * Mathf.Rad2Deg;
+            targetEulerAngles.z = 0.0f;
+            transform.eulerAngles = targetEulerAngles;
         }
 
         //Quaternion DestRot = Quaternion.LookRotation(Target.position - ThisTransform.position, Vector3.up);
