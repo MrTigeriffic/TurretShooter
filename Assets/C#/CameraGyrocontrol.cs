@@ -13,13 +13,17 @@ public class CameraGyrocontrol : MonoBehaviour
     private float initOrientationY;
     private float initOrientationZ;
 
+    private float maxRotYPos = 75f;
+    private float maxRotYNeg = -75f;
     //private Transform ThisTransform = null;// rotation speed delay setup
     //public Transform Target = null;
 
-    public float cameraSensitivity = 2f;
+
     public GameObject playerView;
     public GameObject playerNode;
     public float cameraSpeed;
+
+
     void Start()
     {
         Screen.orientation = ScreenOrientation.LandscapeLeft;
