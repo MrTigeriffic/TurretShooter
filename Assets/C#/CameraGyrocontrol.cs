@@ -69,6 +69,18 @@ public class CameraGyrocontrol : MonoBehaviour
             Vector3 targetEulerAngles = previousEulerAngle + gyroInput * Time.deltaTime * Mathf.Rad2Deg;
             targetEulerAngles.z = 0.0f;
             transform.eulerAngles = targetEulerAngles;
+            //Debug.Log(targetEulerAngles.y);
+            if (targetEulerAngles.y > 75)
+            {
+                Debug.Log("Greater");
+                
+                targetEulerAngles.y = maxRotYPos;
+            }
+            else if (targetEulerAngles.y < -75)
+            {
+                Debug.Log("Less");
+                targetEulerAngles.y = maxRotYNeg;
+            }
         }
 
         //Quaternion DestRot = Quaternion.LookRotation(Target.position - ThisTransform.position, Vector3.up);
