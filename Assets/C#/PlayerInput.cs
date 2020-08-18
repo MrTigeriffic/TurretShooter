@@ -26,7 +26,7 @@ public class PlayerInput : MonoBehaviour
 
             if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId) )
             {
-                Debug.Log("Button Touch");
+                //Debug.Log("Button Touch");
                 nextTimeToFire = Time.time + 1f / fireRate;
                 Shoot();
             }
@@ -40,7 +40,7 @@ public class PlayerInput : MonoBehaviour
     {
         muzzleFlash.Play();
         RaycastHit hit;
-        Debug.Log("Fire!");
+        //Debug.Log("Fire!");
         if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
             Debug.Log(hit.transform.name);
@@ -49,7 +49,19 @@ public class PlayerInput : MonoBehaviour
            if(target != null)// only find target component and then take damage
             {
                 target.TakeDamage(damage);
+                ScoreManager.instance.AddScore();
             }
+        }
+    }
+
+
+
+    //not needed currently
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+           
         }
     }
 }

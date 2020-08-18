@@ -4,6 +4,7 @@ using UnityEngine;
 public class CameraGyrocontrol : MonoBehaviour
 {
     
+
     private bool gyroEnabled;
     private Gyroscope gyro;
     //private GameObject cameraContainer;
@@ -57,6 +58,8 @@ public class CameraGyrocontrol : MonoBehaviour
     {
         if (gyroEnabled)
         {
+            
+            
             //transform.localRotation = gyro.attitude * rot; //update local position of camera 
             //playerNode.transform.Rotate(0, initOrientationY - Input.gyro.rotationRateUnbiased.y * cameraSensitivity, 0);
             //playerView.transform.Rotate(initOrientationX - Input.gyro.rotationRateUnbiased.x * cameraSensitivity, 0, initOrientationZ + Input.gyro.rotationRateUnbiased.z * cameraSensitivity);
@@ -70,13 +73,13 @@ public class CameraGyrocontrol : MonoBehaviour
             targetEulerAngles.z = 0.0f;
             transform.eulerAngles = targetEulerAngles;
             //Debug.Log(targetEulerAngles.y);
-            if (targetEulerAngles.y > 75)
+            if (gyro.attitude.y > 0.7)
             {
-                Debug.Log("Greater");
+                Debug.Log("Y Angle: " + targetEulerAngles.y);
+
                 
-                targetEulerAngles.y = maxRotYPos;
             }
-            else if (targetEulerAngles.y < -75)
+            else if (gyro.attitude.y < -0.3)
             {
                 Debug.Log("Less");
                 targetEulerAngles.y = maxRotYNeg;
