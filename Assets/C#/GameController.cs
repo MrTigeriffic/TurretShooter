@@ -4,26 +4,19 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Rendering;
+using System.Xml.Serialization;
+//using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void StartGame()
     {
-
+        //Debug.Log("Load Game");
+        SceneManager.LoadScene("MainGameScene");
     }
 
     public void PlayerHasDied()
@@ -33,8 +26,13 @@ public class GameController : MonoBehaviour
 
     public void Restart()
     {
-        ScoreManager.instance.ResetScore();
+        //ScoreManager.instance.ResetScore();
         
+    }
+
+    public void Settings()
+    {
+
     }
 
     public void QuitGame()
