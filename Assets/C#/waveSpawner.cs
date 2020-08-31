@@ -105,7 +105,7 @@ public class waveSpawner : MonoBehaviour
     }
     IEnumerator SpawnWave(Wave _wave)
     {
-        Debug.Log("Spawning Wave: " + _wave.name);
+        //Debug.Log("Spawning Wave: " + _wave.name);
         state = SpawnState.SPAWNING;
         //spawn
         for(int i =0; i< _wave.count; i++)
@@ -119,7 +119,7 @@ public class waveSpawner : MonoBehaviour
     }
     void SpawnEnemy(Transform _enemy)
     {
-        Debug.Log("Spawning Enemy: " + _enemy.name);
+        //Debug.Log("Spawning Enemy: " + _enemy.name);
         if (spawnPoint.Length == 0)
         {
             Debug.LogError("No Spawn Points referenced.");

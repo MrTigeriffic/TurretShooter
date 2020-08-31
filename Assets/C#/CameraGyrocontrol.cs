@@ -3,34 +3,34 @@ using UnityEngine;
 
 public class CameraGyrocontrol : MonoBehaviour
 {
-    
 
     private bool gyroEnabled;
     private Gyroscope gyro;
-    //private GameObject cameraContainer;
     private Quaternion rot;
-
     private float initOrientationX;
     private float initOrientationY;
     private float initOrientationZ;
 
-    private float maxRotYPos = 75f;
-    private float maxRotYNeg = -75f;
-    //private Transform ThisTransform = null;// rotation speed delay setup
-    //public Transform Target = null;
-
-
     public GameObject playerView;
+    public float lookUpMax = -60f;
+    public float lookDownMax = 60f;
+    public float lookLeftMax = -180f;
+    public float lookRightMax = 180f;
     public GameObject playerNode;
     public float cameraSpeed;
 
+   
+    //private Transform ThisTransform = null;// rotation speed delay setup
+    //private GameObject cameraContainer;
+    //public Transform Target = null;
 
     void Start()
     {
         Screen.orientation = ScreenOrientation.LandscapeLeft;
         //cameraContainer = new GameObject("Camera Container");
         //cameraContainer.transform.position = transform.position;
-       //transform.SetParent(cameraContainer.transform);
+        //transform.SetParent(cameraContainer.transform);
+
         gyro = Input.gyro;
         gyroEnabled = EnableGyro();
 
@@ -54,41 +54,29 @@ public class CameraGyrocontrol : MonoBehaviour
         return false;
     }
 
-    private void Update()
+    void Update()
     {
         if (gyroEnabled)
         {
-            
-            
+            //11/08/2020 Code below has desired effects with gyroscope and z axis locked
+            Vector3 previousEulerAngle = transform.eulerAngles;
+            Vector3 gyroInput = -Input.gyro.rotationRateUnbiased;
+            Vector3 targetEulerAngles = previousEulerAngle + gyroInput * Time.deltaTime * Mathf.Rad2Deg;
+            targetEulerAngles.x += Mathf.Clamp(targetEulerAngles.x, lookDownMax, lookUpMax);
+            targetEulerAngles.y += Mathf.Clamp(targetEulerAngles.y, lookLeftMax, lookRightMax);
+            targetEulerAngles.z = 0.0f;
+
             //transform.localRotation = gyro.attitude * rot; //update local position of camera 
             //playerNode.transform.Rotate(0, initOrientationY - Input.gyro.rotationRateUnbiased.y * cameraSensitivity, 0);
             //playerView.transform.Rotate(initOrientationX - Input.gyro.rotationRateUnbiased.x * cameraSensitivity, 0, initOrientationZ + Input.gyro.rotationRateUnbiased.z * cameraSensitivity);
             //rotation has undesired effects but starting position from where player hold their phone works
+            //transform.eulerAngles = targetEulerAngles;
 
-            //11/08/2020 Code below has desired effects with gyroscope and z axis locked
-            Vector3 previousEulerAngle = transform.eulerAngles;
-            Vector3 gyroInput = -Input.gyro.rotationRateUnbiased;
-
-            Vector3 targetEulerAngles = previousEulerAngle + gyroInput * Time.deltaTime * Mathf.Rad2Deg;
-            targetEulerAngles.z = 0.0f;
-            transform.eulerAngles = targetEulerAngles;
-            //Debug.Log(targetEulerAngles.y);
-            if (gyro.attitude.y > 0.7)
-            {
-                Debug.Log("Y Angle: " + targetEulerAngles.y);
-
-                
-            }
-            else if (gyro.attitude.y < -0.3)
-            {
-                Debug.Log("Less");
-                targetEulerAngles.y = maxRotYNeg;
-            }
         }
 
-        //Quaternion DestRot = Quaternion.LookRotation(Target.position - ThisTransform.position, Vector3.up);
-        //ThisTransform.rotation = Quaternion.RotateTowards(ThisTransform.rotation, DestRot, cameraSensitivity * Time.deltaTime);// look delay to be applied to gun when rotating. Needs tweaking
-    }
+    //Quaternion DestRot = Quaternion.LookRotation(Target.position - ThisTransform.position, Vector3.up);
+    //ThisTransform.rotation = Quaternion.RotateTowards(ThisTransform.rotation, DestRot, cameraSensitivity * Time.deltaTime);// look delay to be applied to gun when rotating. Needs tweaking
+    }   
 
     // Update is called once per frame
     //void Update()
