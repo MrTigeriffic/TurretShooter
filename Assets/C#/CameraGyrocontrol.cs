@@ -7,12 +7,11 @@ public class CameraGyrocontrol : MonoBehaviour
     private bool gyroEnabled;
     private Gyroscope gyro;
     private Quaternion rot;
-    private float initOrientationX;
-    private float initOrientationY;
-    private float initOrientationZ;
+    private float ClampX, ClampY;
+    private float initOrientationX, initOrientationY, initOrientationZ;
 
     public GameObject playerView;
-    public float lookUpMax = -60f;
+    public float lookUpMax = -60f; //Field of View clamping Values
     public float lookDownMax = 60f;
     public float lookLeftMax = -180f;
     public float lookRightMax = 180f;
@@ -27,17 +26,20 @@ public class CameraGyrocontrol : MonoBehaviour
     void Start()
     {
         Screen.orientation = ScreenOrientation.LandscapeLeft;
-        //cameraContainer = new GameObject("Camera Container");
-        //cameraContainer.transform.position = transform.position;
-        //transform.SetParent(cameraContainer.transform);
-
         gyro = Input.gyro;
         gyroEnabled = EnableGyro();
 
         GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, -cameraSpeed);
+
         initOrientationX = Input.gyro.rotationRateUnbiased.x;
         initOrientationY = Input.gyro.rotationRateUnbiased.y;
         initOrientationZ = -Input.gyro.rotationRateUnbiased.z;
+
+
+
+        //cameraContainer = new GameObject("Camera Container");
+        //cameraContainer.transform.position = transform.position;
+        //transform.SetParent(cameraContainer.transform);
     }
 
     private bool EnableGyro()
@@ -59,11 +61,14 @@ public class CameraGyrocontrol : MonoBehaviour
         if (gyroEnabled)
         {
             //11/08/2020 Code below has desired effects with gyroscope and z axis locked
+            ClampX = Mathf.Clamp(transform.eulerAngles.x, lookLeftMax, lookRightMax);
+            ClampY = Mathf.Clamp(transform.eulerAngles.y, lookDownMax, lookUpMax);
+
             Vector3 previousEulerAngle = transform.eulerAngles;
             Vector3 gyroInput = -Input.gyro.rotationRateUnbiased;
             Vector3 targetEulerAngles = previousEulerAngle + gyroInput * Time.deltaTime * Mathf.Rad2Deg;
-            targetEulerAngles.x += Mathf.Clamp(targetEulerAngles.x, lookDownMax, lookUpMax);
-            targetEulerAngles.y += Mathf.Clamp(targetEulerAngles.y, lookLeftMax, lookRightMax);
+            targetEulerAngles.x = ClampX + gyroInput.x * Time.deltaTime * Mathf.Rad2Deg;
+            targetEulerAngles.y = ClampY + gyroInput.y * Time.deltaTime * Mathf.Rad2Deg;
             targetEulerAngles.z = 0.0f;
 
             //transform.localRotation = gyro.attitude * rot; //update local position of camera 
