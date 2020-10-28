@@ -6,10 +6,11 @@ public class CameraMouseControl : MonoBehaviour
 {
     //private Transform ThisTransform = null;
     public float RotSpeed = 50.0f;
-    // Start is called before the first frame update
+    public float rotHead = 50.0f;
+
     public Transform Target;
-    //public Transform Player;
-    //private Transform Target,Player;
+    public Transform rotAround;
+
 
     float mouseX, mouseY;
     void Start()
@@ -17,8 +18,6 @@ public class CameraMouseControl : MonoBehaviour
         
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        //Target = this.transform.parent;
-       //Player = Target.transform.parent;
     }
 
     // Update is called once per frame
@@ -36,8 +35,8 @@ public class CameraMouseControl : MonoBehaviour
         //    }
         //}
 
-
         CamControl();
+        CamRotate();
     }
 
     void CamControl()
@@ -57,4 +56,28 @@ public class CameraMouseControl : MonoBehaviour
         //Target.rotation = Quaternion.RotateTowards(Player.transform.rotation, DestRot, RotSpeed * Time.deltaTime);
 
     }
+    void CamRotate()
+    {
+        //Vector3 pos = this.transform.position;
+        //Quaternion rot = Quaternion.AngleAxis(angle, axis);//get desired rotation
+        //Vector3 dir = pos - centre;//find current direction relative 
+        //dir = rot * dir; //rotate the direction
+        //this.transform.position = centre + dir;//define new position 
+
+        //Quaternion myRot = transform.rotation;
+        //transform.rotation *= Quaternion.Inverse(myRot) * rot * myRot; //rotate object to keep looking at center
+
+        Vector3 lookDir = new Vector3(0.0f, 0.0f, 0.0f);
+        mouseX += Input.GetAxis("Mouse X") * RotSpeed * Time.deltaTime;
+        mouseY -= Input.GetAxis("Mouse Y") * RotSpeed * Time.deltaTime;
+        mouseY = Mathf.Clamp(mouseY, -25, 40);
+        mouseX = Mathf.Clamp(mouseX, -75, 75);
+        lookDir = Quaternion.Euler(0.0f, mouseX, 0.0f) * lookDir;
+
+        transform.RotateAround(rotAround.transform.position, rotAround.transform.up, Input.GetAxis("Mouse X") * rotHead * Time.deltaTime);// getting some results but getting weird rotation that does not appear to be clamping on the rotating
+        transform.RotateAround(rotAround.transform.position, rotAround.transform.up, Input.GetAxis("Mouse Y") * rotHead * Time.deltaTime);
+        
+
+    }
+
 }
