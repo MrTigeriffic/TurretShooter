@@ -8,7 +8,7 @@ public class ThirdPersonCharacterControl : MonoBehaviour
     public float turnSpeed;
     private Transform ThisTransform = null;
 
-    public Transform Target = null;
+    public Transform TurretTarget = null;
     void Start()
     {
         ThisTransform = GetComponent<Transform>();
@@ -17,7 +17,7 @@ public class ThirdPersonCharacterControl : MonoBehaviour
     
     void Update()
     {
-        Quaternion DestRot = Quaternion.LookRotation(Target.position - ThisTransform.position, Vector3.up);
+        Quaternion DestRot = Quaternion.LookRotation(TurretTarget.position - ThisTransform.position, Vector3.up);
 
         ThisTransform.rotation = Quaternion.RotateTowards(ThisTransform.rotation, DestRot, turnSpeed * Time.deltaTime);
         //PlayerMovement();
@@ -28,7 +28,7 @@ public class ThirdPersonCharacterControl : MonoBehaviour
         //float hor = Input.GetAxis("Horizontal");
         //float ver = Input.GetAxis("Vertical");
         //Vector3 playerMovement = new Vector3(hor, 0f, ver).normalized * turnSpeed * Time.deltaTime;
-        Quaternion DestRot = Quaternion.LookRotation(Target.position - ThisTransform.position, Vector3.up);
+        Quaternion DestRot = Quaternion.LookRotation(TurretTarget.position - ThisTransform.position, Vector3.up);
 
         ThisTransform.rotation = Quaternion.RotateTowards(ThisTransform.rotation, DestRot, turnSpeed * Time.deltaTime);
         //throw new NotImplementedException();
