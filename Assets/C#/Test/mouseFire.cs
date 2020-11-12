@@ -5,10 +5,13 @@ using UnityEngine;
 public class mouseFire : MonoBehaviour
 {
     private Transform barrelRoll;
-    
-    bool rotating = false;
-    public float initialSpeed;
     private float topSpeed = 0f;
+    public float range = 100f;
+    bool rotating = false;
+
+    public float initialSpeed;
+    public float damage = 10f;    
+
     //private Vector3 relativePosition;
     //private Quaternion targetRotation;
 
@@ -23,6 +26,7 @@ public class mouseFire : MonoBehaviour
     void Update()
     {
         if (Input.GetMouseButton(0)){
+            RaycastSingle();
             rotating = true;
             initialSpeed += 0.03f;
             transform.Rotate(0, 0, initialSpeed);
@@ -52,7 +56,7 @@ public class mouseFire : MonoBehaviour
             
             if (topSpeed == 8f)
             {
-                Debug.Log("Wind Down");
+                //Debug.Log("Wind Down");
                 rotating = true;
                 initialSpeed -= 0.5f;
                 transform.Rotate(0, 0, initialSpeed);
@@ -75,8 +79,31 @@ public class mouseFire : MonoBehaviour
     }
     private void OnMouseUp()
     {
-        Debug.Log("Mouse Up");
-        rotating = false;        
-        
+        Debug.Log("_Mouse Up_");
+        rotating = false;
+        //muzzleFlash.Stop();
+    }
+
+    private void RaycastSingle()
+    {
+        Vector3 origin = transform.position;
+        Vector3 direction = transform.forward;
+
+        Debug.DrawRay(origin, direction * 10, Color.red);
+        Ray ray = new Ray(origin, direction);
+
+        RaycastHit hit;
+        //Debug.Log("Fire!");
+        if (Physics.Raycast(ray, out hit,range))
+        {
+            Debug.Log(hit.transform.name);
+
+            Target target = hit.transform.GetComponent<Target>();
+            if (target != null)// only find target component and then take damage
+            {
+                target.TakeDamage(damage);
+                //ScoreManager.instance.AddScore();
+            }
+        }
     }
 }
