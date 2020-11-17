@@ -56,7 +56,7 @@ public class PlayerInput : MonoBehaviour
         muzzleFlash.Play();
         RaycastHit hit;
         //Debug.Log("Fire!");
-        if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range)) 
+        if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit)) 
         {
             Debug.Log(hit.transform.name);
 
@@ -70,6 +70,7 @@ public class PlayerInput : MonoBehaviour
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Debug.DrawRay(ray.origin, ray.direction * 10, Color.cyan);
     }
+    
 
     //not needed currently
     private void OnTriggerEnter(Collider other)
