@@ -1,34 +1,49 @@
-﻿using System.Collections;
+﻿/*Oran Chadwick November 2020
+ * 
+ * This script updates the crosshair position to where the mouse cursor is located on screen
+ * This script will work with the turret prefab where the prefab to the crosshair and raycast out to aid the user
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CrossHair : MonoBehaviour
 {
+    private RectTransform reticle;
 
-    [SerializeField] float speed;
+    public float restingSize;
+    public float maxSize;
+    public float speed;
+    public float currentSize;
 
-    public Transform Reticle;
-    Transform crossTop;
-    Transform crossBottom;
-    Transform crossLeft;
-    Transform crossRight;
-
-    float reticleStartPoint;
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        crossTop = Reticle.Find("Cross/Top").transform;
-        crossLeft = Reticle.Find("Cross/Left").transform;
-        crossRight = Reticle.Find("Cross/Right").transform;
-        crossBottom = Reticle.Find("Cross/Bottom").transform;
-
-        reticleStartPoint = crossTop.localPosition.y;
+        Cursor.visible = false;
+        reticle = GetComponent<RectTransform>(); 
     }
-
     // Update is called once per frame
     void Update()
     {
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
-        Reticle.transform.position = Vector3.Lerp(Reticle.transform.position, screenPos, speed * Time.deltaTime);
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.visible = true;
+        }
+        if (isMoving)
+        {
+            currentSize = Mathf.Lerp(currentSize, maxSize, Time.deltaTime * speed);
+        }
+    }
+
+    bool isMoving
+    {
+        get
+        {
+            if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
+                return true;
+            else
+                return false;
+        }
     }
 }

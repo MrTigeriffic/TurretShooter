@@ -11,10 +11,10 @@ public class KeyboardControl : MonoBehaviour
     private Vector3 lastMouse = new Vector3(255, 255, 255); //kind of in the middle of the screen, rather than at the top (play)
     private float totalRun = 1.0f;
 
-    private float ClampX, ClampY;
+    //private float ClampX, ClampY;
 
-    private float xMin = -1.0f, xMax = 1.0f;
-    private float timeValue = 1.0f;
+    //private float xMin = -1.0f, xMax = 1.0f;
+    //private float timeValue = 1.0f;
 
 
     // Start is called before the first frame update
@@ -35,17 +35,17 @@ public class KeyboardControl : MonoBehaviour
         //    timeValue = 0.0f;
         //}
         lastMouse = Input.mousePosition - lastMouse;
-        ClampX = Mathf.Clamp(lastMouse.x, -90f, 180f);//L R ? configuring range axis are confusing 
-        ClampY = Mathf.Clamp(lastMouse.y, -90f, 190f);//U D ?
+        //ClampX = Mathf.Clamp(lastMouse.x, -90f, 180f);//L R ? configuring range axis are confusing 
+        //ClampY = Mathf.Clamp(lastMouse.y, -90f, 190f);//U D ?
         lastMouse = new Vector3(-lastMouse.y * camSens, lastMouse.x * camSens, 0);
-        lastMouse = new Vector3(ClampX + lastMouse.x, ClampY + lastMouse.y, 0);
+        //lastMouse = new Vector3(ClampX + lastMouse.x, ClampY + lastMouse.y, 0);
         transform.eulerAngles = lastMouse;
         lastMouse = Input.mousePosition;
 
         //Mouse  camera angle done.  
 
         //Keyboard commands
-        float f = 0.0f;
+        //float f = 0.0f;
         Vector3 p = GetBaseInput();
         if (Input.GetKey(KeyCode.LeftShift))
         {

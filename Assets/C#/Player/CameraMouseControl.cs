@@ -18,13 +18,13 @@ public class CameraMouseControl : MonoBehaviour
     void Start()
     {
         
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        if (TargetCursor != null)
-        {
-            initalVector = transform.position - TargetCursor.position;
-            initalVector.y = 0;
-        }
+        //Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //if (TargetCursor != null)
+        //{
+        //    initalVector = transform.position - TargetCursor.position;
+        //    initalVector.y = 0;
+        //}
     }
 
     // Update is called once per frame
