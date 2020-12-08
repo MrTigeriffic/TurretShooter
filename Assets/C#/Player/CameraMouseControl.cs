@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/* Oran Chadwick Dec 2020 
+ * This Script controls the Camera Object and how it orientates around the Turret.
+ * It use a Clamp on the X and Y axis to limit it's range of movement. 
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,15 +16,15 @@ public class CameraMouseControl : MonoBehaviour
 
     public Transform TargetCursor;
     public Transform CameraRotation;
-
+    //public Transform TurretRot;
     private Vector3 initalVector = Vector3.forward;
 
     float mouseX, mouseY;
     void Start()
     {
         
-        //Cursor.visible = false;
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         //if (TargetCursor != null)
         //{
         //    initalVector = transform.position - TargetCursor.position;
@@ -42,17 +47,17 @@ public class CameraMouseControl : MonoBehaviour
         //    }
         //}
 
-        CamControl();
+        CursorControl();
         //CamRotate();
         CamRot_Test();
     }
 
-    void CamControl()
+    void CursorControl()
     {
         mouseX += Input.GetAxis("Mouse X") * RotSpeed;
         mouseY -= Input.GetAxis("Mouse Y") * RotSpeed;
-        mouseY = Mathf.Clamp(mouseY, -25, 40);
-        mouseX = Mathf.Clamp(mouseX, -75, 75);
+        //mouseY = Mathf.Clamp(mouseY, -25, 40);
+        //mouseX = Mathf.Clamp(mouseX, -75, 75);
 
         transform.LookAt(TargetCursor);
 
@@ -97,8 +102,8 @@ public class CameraMouseControl : MonoBehaviour
             mouseX += Input.GetAxis("Mouse X") * RotSpeed * Time.deltaTime;
             mouseY -= Input.GetAxis("Mouse Y") * RotSpeed * Time.deltaTime;
 
-            mouseY = Mathf.Clamp(mouseY, -28, 3);
-            mouseX = Mathf.Clamp(mouseX, -55, 55);
+            mouseY = Mathf.Clamp(mouseY, -25, 40);
+            mouseX = Mathf.Clamp(mouseX, -75, 75);
 
             CameraRotation.rotation = Quaternion.Euler(mouseY, mouseX, 0.0f);// Euler rotates from float values rather than using transform rotate with vectors.
             //Vector3 currentVector = transform.position = Target.position;

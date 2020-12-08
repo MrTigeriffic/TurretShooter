@@ -469,12 +469,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!4 &468653929 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1026424019037309796, guid: 1dafd1457dee80b41bb1bc6dcfb83908,
-    type: 3}
-  m_PrefabInstance: {fileID: 1026424020079091416}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &511611051
 GameObject:
   m_ObjectHideFlags: 0
@@ -687,7 +681,6 @@ GameObject:
   - component: {fileID: 718205205}
   - component: {fileID: 718205208}
   - component: {fileID: 718205209}
-  - component: {fileID: 718205210}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -798,7 +791,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 718205204}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d5d5f620aac568448d9749e39d50ad2, type: 3}
   m_Name: 
@@ -806,24 +799,8 @@ MonoBehaviour:
   RotSpeed: 2
   rotHead: 50
   angleMax: 30
-  TargetCursor: {fileID: 600645323}
+  TargetCursor: {fileID: 1307252752}
   CameraRotation: {fileID: 1021949057}
---- !u!114 &718205210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 718205204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1401099eeca250148a3596804bf4490e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  restingSize: 0
-  maxSize: 0
-  speed: 0
-  currentSize: 0
 --- !u!1001 &860105517
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1801,9 +1778,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireRate: 15
-  initialSpeed: 0
   fpsCam: {fileID: 0}
   muzzleFlash: {fileID: 1704918646}
+  crossHair: {fileID: 0}
   turretBarrel: {fileID: 0}
 --- !u!1 &1573031434
 GameObject:
@@ -2303,6 +2280,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1026424020079091416}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1800601479 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1026424020017179410, guid: 1dafd1457dee80b41bb1bc6dcfb83908,
+    type: 3}
+  m_PrefabInstance: {fileID: 1026424020079091416}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1800601480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2316,11 +2299,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireRate: 15
-  initialSpeed: 0
   fpsCam: {fileID: 718205206}
   muzzleFlash: {fileID: 7996083768246241036, guid: c4f0ade90fbe74547851c7c155e5e866,
     type: 3}
-  turretBarrel: {fileID: 468653929}
+  crossHair: {fileID: 1573031435}
+  turretBarrel: {fileID: 1800601479}
 --- !u!1 &1805163087
 GameObject:
   m_ObjectHideFlags: 0
