@@ -6,7 +6,7 @@ public class ObjectSpawner : MonoBehaviour
 {
     private bool spawningObject = false;//check to see if we can object or not don't want 
 
-    [SerializeField] private float groundSpawnDistance = 5000f;
+    [SerializeField] private float groundSpawnDistance = 5f;
     public static ObjectSpawner instance;
 
     private void Awake()
